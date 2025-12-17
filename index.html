@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>IdeaCrowd — Tell us a problem</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --accent: #0f62fe;
+        --muted: #6b7280;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial;
+        margin: 0;
+        background: var(--bg);
+        color: #0f172a;
+      }
+      .container {
+        max-width: 900px;
+        margin: 36px auto;
+        padding: 20px;
+      }
+      header {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+      .logo {
+        width: 56px;
+        height: 56px;
+        border-radius: 12px;
+        background: linear-gradient(135deg, var(--accent), #7c3aed);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+      }
+      .card {
+        background: var(--card);
+        border-radius: 12px;
+        box-shadow: 0 6px 18px rgba(12, 15, 30, 0.06);
+        padding: 20px;
+        margin-top: 18px;
+      }
+      h1 {
+        font-size: 20px;
+        margin: 0;
+      }
+      p.lead {
+        color: var(--muted);
+        margin: 6px 0 14px;
+      }
+      label {
+        font-size: 13px;
+        color: #111827;
+        display: block;
+        margin-bottom: 6px;
+      }
+      input[type="text"],
+      input[type="email"],
+      select,
+      textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #e6e9ef;
+        border-radius: 8px;
+        font-size: 14px;
+      }
+      textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+      .controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-top: 12px;
+      }
+      button {
+        background: var(--accent);
+        border: none;
+        color: white;
+        padding: 10px 14px;
+        border-radius: 10px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      button.ghost {
+        background: transparent;
+        color: var(--accent);
+        border: 1px solid rgba(15, 98, 254, 0.12);
+      }
+      .muted {
+        color: var(--muted);
+        font-size: 13px;
+      }
+      .small {
+        font-size: 12px;
+        color: var(--muted);
+      }
+      .thankyou {
+        text-align: center;
+        padding: 36px 12px;
+      }
+      .thank-badge {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 72px;
+        height: 72px;
+        border-radius: 18px;
+        background: linear-gradient(135deg, #22c55e, #16a34a);
+        color: white;
+        font-weight: 700;
+        font-size: 28px;
+        margin: 0 auto 14px;
+      }
+      a.btn-link {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 10px 16px;
+        border-radius: 8px;
+        text-decoration: none;
+        background: var(--accent);
+        color: white;
+        font-weight: 600;
+      }
+      footer {
+        margin-top: 22px;
+        color: var(--muted);
+        font-size: 13px;
+      }
+      @media (max-width: 640px) {
+        .row {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <div class="logo">IC</div>
+        <div>
+          <h1>IdeaCrowd — Share a problem you face</h1>
+          <p class="muted">
+            Quick, simple and anonymous — your response may inspire our next
+            product.
+          </p>
+        </div>
+      </header>
+
+      <!-- MAIN CARD: contains both form and thank-you panels (only one visible at a time) -->
+      <section class="card" aria-labelledby="survey">
+        <!-- FORM PANEL -->
+        <div id="formPanel" role="region" aria-labelledby="surveyHeading">
+          <h2 id="surveyHeading">Describe the problem</h2>
+          <p class="lead">
+            Tell us about a problem you encountered in your day-to-day life. Be
+            as specific as you can — short stories are great.
+          </p>
+
+          <form id="surveyForm">
+            <div style="margin-top: 8px">
+              <label for="name">Your name (optional)</label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                placeholder="e.g. Sharath"
+              />
+            </div>
+
+            <div style="margin-top: 12px">
+              <label for="category">Category (optional)</label>
+              <select id="category" name="category">
+                <option value="other">Other</option>
+                <option value="transport">Transport</option>
+                <option value="govservices">Gov. services</option>
+                <option value="education">Education</option>
+                <option value="health">Health</option>
+                <option value="finance">Finance</option>
+                <option value="shopping">Shopping / Retail</option>
+              </select>
+            </div>
+
+            <div style="margin-top: 12px">
+              <label for="email"
+                >Email (optional — we may contact you for follow-up)</label
+              >
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+              />
+            </div>
+
+            <div style="margin-top: 12px">
+              <label for="problem">Problem description</label>
+              <textarea
+                id="problem"
+                name="problem"
+                placeholder="Describe the exact problem, where it happened, how often, and any workarounds you use."
+              ></textarea>
+            </div>
+
+            <div class="controls">
+              <button type="submit" id="submitBtn">Submit</button>
+              <button id="clearBtn" type="button" class="ghost">
+                Clear form
+              </button>
+              <div style="margin-left: auto" class="small">
+                Responses will be emailed automatically.
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- THANK YOU PANEL (initially hidden) -->
+        <div id="thankyouPanel" class="thankyou" style="display: none">
+          <div class="thank-badge">✓</div>
+          <h2>Thank you! 🎉</h2>
+          <p class="muted">
+            Your response has been submitted successfully. We appreciate you
+            taking the time to share your experience.
+          </p>
+          <a href="#" id="newSubmission" class="btn-link" role="button"
+            >Submit another response</a
+          >
+        </div>
+      </section>
+    </div>
+
+    <script>
+      /*
+        Email configuration options:
+        - Replace EMAILJS_* constants with your EmailJS credentials.
+        - If you prefer Formspree, you can adapt send logic accordingly.
+      */
+      const EMAILJS_USER_ID = "MRuZDim18tb5BA9Mi";
+      const EMAILJS_SERVICE_ID = "service_5ef8us9";
+      const EMAILJS_TEMPLATE_ID = "template_kshbv4u";
+
+      // Dynamically load EmailJS SDK (returns true if loaded & init succeeded)
+      async function ensureEmailJSSDK() {
+        if (window.emailjs) {
+          try {
+            emailjs.init(EMAILJS_USER_ID);
+          } catch (e) {
+            /*ignore*/
+          }
+          return true;
+        }
+        return new Promise((resolve) => {
+          const s = document.createElement("script");
+          s.src =
+            "https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js";
+          s.onload = () => {
+            try {
+              emailjs.init(EMAILJS_USER_ID);
+              resolve(true);
+            } catch (e) {
+              console.warn("emailjs init failed", e);
+              resolve(false);
+            }
+          };
+          s.onerror = () => resolve(false);
+          document.head.appendChild(s);
+        });
+      }
+
+      const surveyForm = document.getElementById("surveyForm");
+      const formPanel = document.getElementById("formPanel");
+      const thankyouPanel = document.getElementById("thankyouPanel");
+      const submitBtn = document.getElementById("submitBtn");
+      const newSubmission = document.getElementById("newSubmission");
+      const clearBtn = document.getElementById("clearBtn");
+
+      // Utility: show a small temporary disabled state on button
+      function setSubmitting(isSubmitting) {
+        if (isSubmitting) {
+          submitBtn.disabled = true;
+          submitBtn.textContent = "Sending...";
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = "Submit";
+        }
+      }
+
+      surveyForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const category = document.getElementById("category").value;
+        const problem = document.getElementById("problem").value.trim();
+
+        if (!problem) {
+          alert("Please describe the problem.");
+          return;
+        }
+
+        setSubmitting(true);
+
+        // Ensure SDK is loaded
+        const sdkReady = await ensureEmailJSSDK();
+        if (!sdkReady) {
+          setSubmitting(false);
+          alert("Email service failed to load. Please try again later.");
+          return;
+        }
+
+        try {
+          await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+            from_name: name || "Anonymous",
+            from_email: email || "",
+            category,
+            problem,
+          });
+
+          // Show inline thank-you content (single-page)
+          formPanel.style.display = "none";
+          thankyouPanel.style.display = "block";
+          // Optionally update browser history (so back button returns to form)
+          history.replaceState(null, "", location.pathname + "#thanks");
+        } catch (err) {
+          console.error("Email send failed", err);
+          alert("Failed to send email. Please try again.");
+        } finally {
+          setSubmitting(false);
+        }
+      });
+
+      // "Submit another response" — show form again and reset fields
+      newSubmission.addEventListener("click", (ev) => {
+        ev.preventDefault();
+        surveyForm.reset();
+        thankyouPanel.style.display = "none";
+        formPanel.style.display = "block";
+        history.replaceState(null, "", location.pathname); // remove #thanks
+        // focus first input
+        document.getElementById("name").focus();
+      });
+
+      clearBtn.addEventListener("click", () => {
+        if (confirm("Clear all fields?")) {
+          surveyForm.reset();
+        }
+      });
+
+      // Accessibility: if user landed with #thanks show thankyou panel
+      if (location.hash === "#thanks") {
+        formPanel.style.display = "none";
+        thankyouPanel.style.display = "block";
+      }
+    </script>
+  </body>
+</html>
